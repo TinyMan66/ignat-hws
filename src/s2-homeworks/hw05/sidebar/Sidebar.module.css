@@ -8,15 +8,38 @@
 }
 
 .nav {
+    color: #000000;
+    text-decoration-line: none;
 }
 
 .nav a {
+    /*font-family: 'Montserrat';*/
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    text-decoration-line: none;
+    color: #000000;
 }
 
 .nav a:hover {
+    /*font-family: 'Montserrat';*/
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    text-decoration-line: none;
+    color: #58ACFF;
 }
 
 .nav a.active {
+    /*font-family: 'Montserrat';*/
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    text-decoration-line: underline;
+    color: #0059B2;
 }
 .close {
 }
