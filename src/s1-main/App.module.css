@@ -1,16 +1,26 @@
 .App {
     --header_height: 60px;
+    max-width: 1280px;
+    border: 1px solid;
+    margin: 0 auto;
+    padding: 0 40px;
 }
 
 .hw {
-    position: relative;
-    width: 100%;
+    /*position: relative;*/
+    /*width: 100%;*/
     /*border: 1px solid black;*/
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-content: flex-start;*/
 }
 
 .hwTitle {
     margin: 10px 0 20px 10px;
 }
+/*.container {*/
+/*    max-width: 1280px;*/
+/*    border: 1px solid;*/
+/*    margin: 0 auto;*/
+/*    padding: 0 40px;*/
+/*}*/
