@@ -9,16 +9,18 @@ function Clock() {
     const [date, setDate] = useState<Date>(new Date(restoreState('hw9-date', Date.now())))
     const [show, setShow] = useState<boolean>(false)
     const [disableStart, setDisableStart] = useState<boolean>(false)
-    const [disableStop, setDisableStop] = useState<boolean>(false)
+    const [disableStop, setDisableStop] = useState<boolean>(true)
 
     const start = () => {
         // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
         // сохранить ид таймера (https://learn.javascript.ru/settimeout-setinterval#setinterval)
         stop()
         setDisableStop(false)
+
         const id: number = window.setInterval(() => {
             setDate(new Date())
         }, 1000)
+
         setTimerId(id)
         setDisableStart(true)
     }
@@ -26,6 +28,8 @@ function Clock() {
     const stop = () => {
         // пишут студенты // поставить часы на паузу, обнулить ид таймера (timerId <- undefined)
         clearTimeout(timerId)
+        setTimerId(undefined)
+
         setDisableStop(true)
         setDisableStart(false)
     }
@@ -44,21 +48,24 @@ function Clock() {
 
     const stringDate = `${getTwoDigitsString(date.getDate())}.${getTwoDigitsString(date.getMonth())}.${date.getFullYear()}` || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
 
-    // вариан проще берем время и дату из операционной системы:
+    // вариан проще - берем время и дату из операционной системы:
     // const stringTime = date.toLocaleTimeString() || <br/>
     // const stringDate = date.toLocaleDateString() || <br/>
 
     // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
 
     let formatterDay = new Intl.DateTimeFormat('en-GB', {
+        localeMatcher: 'best fit',
         weekday: 'long'
     });
+
     let formatterMonth = new Intl.DateTimeFormat('en-GB', {
         month: 'long'
     });
 
-    const stringDay = formatterDay.format(date.getDay()) || <br/> // пишут студенты
-    const stringMonth = formatterMonth.format(date.getMonth()) || <br/> // пишут студенты
+    const stringDay = formatterDay.format(date) || <br/> // пишут студенты
+    const stringMonth = formatterMonth.format(date) || <br/> // пишут студенты
+    console.log(stringDay)
 
     return (
         <div className={s.clock}>
