@@ -41,23 +41,12 @@ function Clock() {
         setShow(false)
     }
 
-    // замороченный вариант:
-    // const getTwoDigitsString = (num: number) => num < 10 ? ` 0${num}` : num;
-
-    // const stringTime = `${getTwoDigitsString(date.getHours())} : ${getTwoDigitsString(date.getMinutes())} : ${getTwoDigitsString(date.getSeconds())}`|| <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
-    //
-    // const stringDate = `${getTwoDigitsString(date.getDate())}.${getTwoDigitsString(date.getMonth())}.${date.getFullYear()}` || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
-
-    // вариан проще - берем время и дату из операционной системы:
-    // const stringTime = date.toLocaleTimeString() || <br/>
-    const stringTime = date.toLocaleTimeString('ru-Ru') || <br/>;
-    // const stringDate = date.toLocaleDateString() || <br/>
-    const stringDate = date.toLocaleDateString('ru-Ru') || <br/>
+    const stringTime = date.toLocaleTimeString('ru-Ru') || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
+    const stringDate = date.toLocaleDateString('ru-Ru') || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
 
     // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
 
     let formatterDay = new Intl.DateTimeFormat('en-GB', {
-        localeMatcher: 'best fit',
         weekday: 'long'
     });
 
