@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import s2 from '../../s1-main/App.module.css'
 import s from './HW13.module.css'
 import SuperButton from '../hw04/common/c2-SuperButton/SuperButton'
-import axios from 'axios'
+import axios, {AxiosError} from 'axios'
 import success200 from './images/200.svg'
 import error400 from './images/400.svg'
 import error500 from './images/500.svg'
@@ -37,13 +37,59 @@ const HW13 = () => {
                 setCode('Код 200!')
                 setImage(success200)
                 // дописать
-
+                setInfo(res.data.info)
+                setText(res.data.errorText)
             })
-            .catch((e) => {
-                // дописать
+            .catch((e: AxiosError) => {
+                if (e.response?.status && e.response.status === 500) {
+                    setCode('Код 500!')
+                    setImage(error500)
+                    setInfo( e.response
+                        ? (e.response.data as ({ info: string, errorText: string })).info
+                        : e.message)
+                    setText(e.response
+                        ? (e.response.data as ({ info: string, errorText: string })).errorText
+                        : e.message)
 
+                } else if (e.response?.status && e.response.status === 400) {
+                    setCode('Код 400!')
+                    setImage(error400)
+                    setInfo(e.response
+                        ? (e.response.data as ({ info: string, errorText: string })).info
+                        : e.message)
+                    setText(e.response
+                        ? (e.response.data as ({ info: string, errorText: string })).errorText
+                        : e.message)
+                } else {
+                    setCode('ERROR!')
+                    setImage(errorUnknown)
+                    setInfo(e.name)
+                    setText(e.message)
+                }
             })
     }
+
+
+    // не работает!! пофиксить:
+    // const handleServerNetworkError = (error: AxiosError, status: number | null, image: string) => {
+    //     if (error.response?.status && error.response.status === status) {
+    //         let errorInfo = error.response
+    //             ? (error.response.data as ({ info: string, errorText: string })).info
+    //             : error.message
+    //         let errorText = error.response
+    //             ? (error.response.data as ({ info: string, errorText: string })).errorText
+    //             : error.message
+    //         setCode(`Код ${error.response.status}`)
+    //         setImage(image)
+    //         setInfo(errorInfo)
+    //         setText(errorText)
+    //     } else {
+    //         setCode(code)
+    //         setImage(image)
+    //         setInfo(error.name)
+    //         setText(error.message)
+    //     }
+    // }
 
     return (
         <div id={'hw13'}>
@@ -56,7 +102,7 @@ const HW13 = () => {
                         onClick={send(true)}
                         xType={'secondary'}
                         // дописать
-
+                        disabled={info === '...loading'}
                     >
                         Send true
                     </SuperButton>
@@ -65,7 +111,7 @@ const HW13 = () => {
                         onClick={send(false)}
                         xType={'secondary'}
                         // дописать
-
+                        disabled={info === '...loading'}
                     >
                         Send false
                     </SuperButton>
@@ -74,7 +120,7 @@ const HW13 = () => {
                         onClick={send(undefined)}
                         xType={'secondary'}
                         // дописать
-
+                        disabled={info === '...loading'}
                     >
                         Send undefined
                     </SuperButton>
@@ -83,7 +129,7 @@ const HW13 = () => {
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
                         // дописать
-
+                        disabled={info === '...loading'}
                     >
                         Send null
                     </SuperButton>
