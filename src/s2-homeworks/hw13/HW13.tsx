@@ -24,7 +24,8 @@ const HW13 = () => {
         const url =
             x === null
                 ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
-                : 'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test'
+                // : 'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test'
+                : 'https://samurai.it-incubator.io/api/3.0/homework/test'
 
         setCode('')
         setImage('')
@@ -68,28 +69,6 @@ const HW13 = () => {
                 }
             })
     }
-
-
-    // не работает!! пофиксить:
-    // const handleServerNetworkError = (error: AxiosError, status: number | null, image: string) => {
-    //     if (error.response?.status && error.response.status === status) {
-    //         let errorInfo = error.response
-    //             ? (error.response.data as ({ info: string, errorText: string })).info
-    //             : error.message
-    //         let errorText = error.response
-    //             ? (error.response.data as ({ info: string, errorText: string })).errorText
-    //             : error.message
-    //         setCode(`Код ${error.response.status}`)
-    //         setImage(image)
-    //         setInfo(errorInfo)
-    //         setText(errorText)
-    //     } else {
-    //         setCode(code)
-    //         setImage(image)
-    //         setInfo(error.name)
-    //         setText(error.message)
-    //     }
-    // }
 
     return (
         <div id={'hw13'}>
