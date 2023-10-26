@@ -23,12 +23,16 @@
 .row {
     display: flex;
     height: 40px;
+    width: 50vw;
+    padding-left: 15px;
 }
 
 .rowHeader {
     display: flex;
     background-color: #e5e5e5;
+    width: 50vw;
     height: 40px;
+    padding-left: 15px;
 }
 
 .loading {
