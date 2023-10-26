@@ -24,7 +24,7 @@ type TechType = {
 const getTechs = (params: any) => {
     return axios
         .get<{ techs: TechType[], totalCount: number }>(
-            'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test3',
+            'https://samurai.it-incubator.io/api/3.0/homework/test3',
             {params}
         )
         .catch((e) => {
@@ -46,34 +46,33 @@ const HW15 = () => {
         getTechs(params)
             .then((res) => {
                 // делает студент
-
+                setLoading(false)
                 // сохранить пришедшие данные
-
+                if(res?.data) {
+                    setTechs(res.data.techs)
+                    setTotalCount(res.data.totalCount)
+                }
                 //
             })
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
+        setPage(newPage)
+        setCount(newCount)
 
-        // setPage(
-        // setCount(
-
-        // sendQuery(
-        // setSearchParams(
-
+        sendQuery({page: newPage.toString(), count: newCount.toString(), sort: sort.toString()})
+        setSearchParams({page: newPage.toString(), count: newCount.toString(), sort: sort.toString()})
         //
     }
 
     const onChangeSort = (newSort: string) => {
         // делает студент
+        setSort(newSort)
+        setPage(1) // при сортировке сбрасывать на 1 страницу
 
-        // setSort(
-        // setPage(1) // при сортировке сбрасывать на 1 страницу
-
-        // sendQuery(
-        // setSearchParams(
-
+        sendQuery({page: page.toString(), count: count.toString(), sort: newSort.toString()})
+        setSearchParams({page: page.toString(), count: count.toString(), sort: newSort.toString()})
         //
     }
 
@@ -112,12 +111,12 @@ const HW15 = () => {
 
                 <div className={s.rowHeader}>
                     <div className={s.techHeader}>
-                        tech
+                        Tech
                         <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/>
                     </div>
 
                     <div className={s.developerHeader}>
-                        developer
+                        Developer
                         <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
                     </div>
                 </div>
