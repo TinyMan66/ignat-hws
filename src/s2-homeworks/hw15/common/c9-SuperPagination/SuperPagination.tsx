@@ -51,7 +51,7 @@ const SuperPagination: React.FC<SuperPaginationPropsType> = (
             </span>
 
             <SuperSelect
-                style={{width: '40px'}}
+                style={{width: '40px', marginTop: '3px'}}
                 id={id + '-pagination-select'}
                 value={itemsCountForPage}
                 options={[
